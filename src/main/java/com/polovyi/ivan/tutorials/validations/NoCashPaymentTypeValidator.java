@@ -1,16 +1,15 @@
-package com.portoseg.validations.constraints;
+package com.polovyi.ivan.tutorials.validations;
 
-import com.portoseg.enumeration.ProposalDecisionType;
-import com.portoseg.validations.annotations.NotDerivationStatus;
+import com.polovyi.ivan.tutorials.enm.PaymentType;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class NotDerivationStatusValidator implements ConstraintValidator<NotDerivationStatus, ProposalDecisionType> {
+public class NoCashPaymentTypeValidator implements ConstraintValidator<NoCashPaymentType, PaymentType> {
 
     @Override
-    public boolean isValid(ProposalDecisionType proposalDecisionType, ConstraintValidatorContext context) {
-        return !ProposalDecisionType.DERIVACAO.equals(proposalDecisionType);
+    public boolean isValid(PaymentType paymentType, ConstraintValidatorContext context) {
+        return !PaymentType.CASH.equals(paymentType);
     }
 
 }

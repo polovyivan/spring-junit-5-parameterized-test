@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = NoCashPaymentTypeValidator.class)
-public @interface NoCashPaymentType {
+@Constraint(validatedBy = PasswordValidator.class)
+public @interface Password {
 
     String message() default "Error!";
 

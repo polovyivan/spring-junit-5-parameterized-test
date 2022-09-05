@@ -1,4 +1,4 @@
-package com.polovyi.ivan.dto.response;
+package com.polovyi.ivan.tutorials.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

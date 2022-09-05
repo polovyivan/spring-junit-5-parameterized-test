@@ -1,6 +1,4 @@
-package com.portoseg.validations.annotations;
-
-import com.portoseg.validations.constraints.NotDerivationStatusValidator;
+package com.polovyi.ivan.tutorials.validations;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,10 +11,10 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = NotDerivationStatusValidator.class)
-public @interface NotDerivationStatus {
+@Constraint(validatedBy = NoCashPaymentTypeValidator.class)
+public @interface NoCashPaymentType {
 
-    String message() default "400.001";
+    String message() default "Error!";
 
     Class<?>[] groups() default {};
 

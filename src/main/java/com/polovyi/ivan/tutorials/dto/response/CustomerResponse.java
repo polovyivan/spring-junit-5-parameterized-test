@@ -1,12 +1,14 @@
-package com.polovyi.ivan.dto.response;
+package com.polovyi.ivan.tutorials.dto.response;
 
-import com.polovyi.ivan.entity.CustomerEntity;
+import com.polovyi.ivan.tutorials.enm.PaymentType;
+import com.polovyi.ivan.tutorials.entity.CustomerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Builder
@@ -18,7 +20,11 @@ public class CustomerResponse {
 
     private String fullName;
 
-    private String phoneNumber;
+    private PaymentType paymentType;
+
+    private LocalDate birthDate;
+
+    private Set<String> phoneNumbers;
 
     private String address;
 
@@ -28,9 +34,12 @@ public class CustomerResponse {
         return builder()
                 .id(customer.getId())
                 .fullName(customer.getFullName())
-                .phoneNumber(customer.getPhoneNumber())
+                .paymentType(customer.getPaymentType())
+                .birthDate(customer.getBirthDate())
+                .phoneNumbers(customer.getPhoneNumber())
                 .address(customer.getAddress())
                 .createdAt(customer.getCreatedAt())
                 .build();
     }
+
 }
