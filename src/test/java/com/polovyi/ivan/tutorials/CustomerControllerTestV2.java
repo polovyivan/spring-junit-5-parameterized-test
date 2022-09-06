@@ -106,7 +106,7 @@ class CustomerControllerTestV2 extends ControllerTest {
         thenExpectResponseHasCreatedStatus();
     }
 
-    // @NotBlank
+    // fullName
     @ParameterizedTest
     @NullSource
     @EmptySource
@@ -140,9 +140,7 @@ class CustomerControllerTestV2 extends ControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
-    // @NotNull
-    // Enum
-
+    // paymentType
     @ParameterizedTest
     @EnumSource(mode = EXCLUDE, names = { "CASH" })
     public void shouldCreateCustomerGivenPaymentTypes(PaymentType paymentType) throws Exception {
@@ -166,9 +164,9 @@ class CustomerControllerTestV2 extends ControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
-    // Data
+    // birthDate
     @ParameterizedTest
-    @ValueSource(strings = { "2030-06-01" })
+    @ValueSource(strings = { "1899-12-31", "2030-06-01" })
     public void shouldNotCreateCustomerGivenInvalidDate(
             @JavaTimeConversionPattern("yyyy-MM-dd") LocalDate birthDate) throws Exception {
         log.info("name = <{}>", birthDate);
@@ -178,7 +176,7 @@ class CustomerControllerTestV2 extends ControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
-    // Address
+    // address
     @ParameterizedTest
     @MethodSource("addressRange")
     public void shouldNotCreateCustomerGivenInvalidAddress(
@@ -190,7 +188,7 @@ class CustomerControllerTestV2 extends ControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
-    // Phones
+    // phones
     @ParameterizedTest
     @NullSource
     @EmptySource
@@ -214,8 +212,7 @@ class CustomerControllerTestV2 extends ControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
-
-    // Password
+    // password - passwordConfirmation
     @ParameterizedTest
     @MethodSource("invalidPasswordAndPasswordConfirmationCombination")
     public void shouldNotCreateCustomerGivenInvalidPasswordAndPasswordCombination(String password,
@@ -291,22 +288,6 @@ class CustomerControllerTestV2 extends ControllerTest {
     private void givenRequestWithInvalidFullName(String name) {
         givenValidCreateCustomerRequest();
         createCustomerRequest.setFullName(name);
-    }
-
-    private void givenRequestWithInvalidPaymentType(PaymentType paymentType) {
-        givenValidCreateCustomerRequest();
-        createCustomerRequest.setPaymentType(paymentType);
-    }
-
-    private void givenRequestWithPhoneNumberAsNull() {
-        givenValidCreateCustomerRequest();
-        createCustomerRequest.setPhoneNumbers(null);
-
-    }
-
-    private void givenRequestWithAddressAsNull() {
-        givenValidCreateCustomerRequest();
-        createCustomerRequest.setAddress(null);
     }
 
     /*

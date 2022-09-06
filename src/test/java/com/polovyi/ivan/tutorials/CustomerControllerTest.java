@@ -165,9 +165,11 @@ class CustomerControllerTest {
         createCustomerRequest = CreateCustomerRequest.builder()
                 .fullName("Ivan Polovyi")
                 .paymentType(PaymentType.VISA)
-                .birthDate(LocalDate.of(1984,1,5))
+                .birthDate(LocalDate.of(1984, 1, 5))
                 .phoneNumbers(Set.of("1-669-210-0504"))
                 .address("Apt. 843 399 Lachelle Crossing, New Eldenhaven, LA 63962-9260")
+                .password("password")
+                .passwordConfirmation("password")
                 .build();
     }
 

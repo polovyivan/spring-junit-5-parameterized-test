@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -44,5 +45,10 @@ public class CreateCustomerRequest {
     private String password;
 
     private String passwordConfirmation;
+
+    @AssertTrue(message = "The field birthDate has to be after 1900-01-01")
+    private boolean isValidBirthDate() {
+        return this.birthDate.isAfter(LocalDate.of(1900, 1, 1));
+    }
 
 }
