@@ -12,9 +12,9 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 @Data
@@ -31,8 +31,6 @@ public class CreateCustomerRequest {
     @NoCashPaymentType(message = "The payment type CASH is not allowed!")
     private PaymentType paymentType;
 
-    @NotNull(message = "The field birthDate cannot be null")
-    @Past(message = "The field birthDate has to be in the past")
     private LocalDate birthDate;
 
     @NotNull(message = "The field address cannot be null")
@@ -46,9 +44,12 @@ public class CreateCustomerRequest {
 
     private String passwordConfirmation;
 
-    @AssertTrue(message = "The field birthDate has to be after 1900-01-01")
+    @AssertTrue(message = "The field birthDate is invalid")
     private boolean isValidBirthDate() {
-        return this.birthDate.isAfter(LocalDate.of(1900, 1, 1));
+        return Optional.ofNullable(this.birthDate)
+                .filter(date -> date.isAfter(LocalDate.of(1900, 1, 1)))
+                .filter(date -> date.isBefore(LocalDate.now()))
+                .isPresent();
     }
 
 }

@@ -95,7 +95,6 @@ class CustomerControllerTest {
         thenExpectResponseHasCreatedStatus();
     }
 
-    // @NotBlank
     @Test
     public void shouldNotCreateCustomerGivenFullNameAsNull() throws Exception {
         givenRequestWithFullNameAsNull();
@@ -119,12 +118,6 @@ class CustomerControllerTest {
         thenExpectNoCallToCustomerServiceCreateCustomer();
         thenExpectResponseHasBadRequestStatus();
     }
-
-
-
-
-
-
 
     @Test
     public void shouldNotCreateCustomerGivenPhoneNumberAsNull() throws Exception {
