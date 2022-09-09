@@ -1,8 +1,10 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
+import com.polovyi.ivan.tutorials.enm.PaymentType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -11,8 +13,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
+import static org.junit.jupiter.params.provider.EnumSource.Mode.INCLUDE;
+
 @Slf4j
-class CustomerControllerRequestBirthDateTestV2 extends ControllerTest {
+public class BirthDateValidationTest extends ControllerTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "1899-12-31", "2030-06-01" })

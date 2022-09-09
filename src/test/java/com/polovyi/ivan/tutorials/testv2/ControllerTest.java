@@ -1,4 +1,4 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,8 +8,11 @@ import com.polovyi.ivan.tutorials.dto.response.CustomerResponse;
 import com.polovyi.ivan.tutorials.enm.PaymentType;
 import com.polovyi.ivan.tutorials.service.CustomerService;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
-class CustomerControllerRequestAddressTestV2 extends ControllerTest {
+public class AddressValidationTest extends ControllerTest {
 
     @ParameterizedTest
     @MethodSource("invalidAddressVariation")

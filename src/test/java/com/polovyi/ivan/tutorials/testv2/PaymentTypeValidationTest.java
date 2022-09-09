@@ -1,4 +1,4 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
 import com.polovyi.ivan.tutorials.enm.PaymentType;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.INCLUDE;
 
 @Slf4j
-class CustomerControllerRequestPaymentTypeTestV2 extends ControllerTest {
+public class PaymentTypeValidationTest extends ControllerTest {
 
     @ParameterizedTest
     @EnumSource(mode = EXCLUDE, names = { "CASH" })

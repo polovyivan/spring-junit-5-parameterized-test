@@ -1,7 +1,6 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,9 +11,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 @Slf4j
-class CustomerControllerRequestPhonesTestV2 extends ControllerTest {
+public class PhonesValidationTest extends ControllerTest {
 
-    @Test
     @ParameterizedTest
     @NullSource
     @EmptySource

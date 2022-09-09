@@ -1,4 +1,4 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
-class CustomerControllerRequestFullNameTestV2 extends ControllerTest {
+public class FullNameValidationTest extends ControllerTest {
 
     @ParameterizedTest
     @NullSource

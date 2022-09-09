@@ -1,4 +1,4 @@
-package com.polovyi.ivan.tutorials;
+package com.polovyi.ivan.tutorials.testv2;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @Slf4j
-class CustomerControllerRequestPasswordTestV2 extends ControllerTest {
+public class PasswordValidationTest extends ControllerTest {
 
     @ParameterizedTest
     @MethodSource("invalidPasswordAndPasswordConfirmationCombination")
@@ -50,5 +50,4 @@ class CustomerControllerRequestPasswordTestV2 extends ControllerTest {
                 arguments(StringUtils.EMPTY, StringUtils.SPACE)
         );
     }
-
 }
