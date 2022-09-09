@@ -40,7 +40,6 @@ public class PasswordValidationTest extends ControllerTest {
                 arguments(null, "password"),
                 arguments("password", null),
                 arguments("password", "_password"),
-                arguments("_password", "password"),
                 arguments(StringUtils.EMPTY, StringUtils.EMPTY),
                 arguments(StringUtils.EMPTY, "password"),
                 arguments("password", StringUtils.EMPTY),

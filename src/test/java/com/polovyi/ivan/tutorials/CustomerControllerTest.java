@@ -8,6 +8,8 @@ import com.polovyi.ivan.tutorials.dto.response.CustomerResponse;
 import com.polovyi.ivan.tutorials.enm.PaymentType;
 import com.polovyi.ivan.tutorials.service.CustomerService;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -95,6 +97,7 @@ class CustomerControllerTest {
         thenExpectResponseHasCreatedStatus();
     }
 
+    // full name validation
     @Test
     public void shouldNotCreateCustomerGivenFullNameAsNull() throws Exception {
         givenRequestWithFullNameAsNull();
@@ -119,14 +122,49 @@ class CustomerControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
+    // payment type
     @Test
-    public void shouldNotCreateCustomerGivenPhoneNumberAsNull() throws Exception {
-        givenRequestWithPhoneNumberAsNull();
+    public void shouldNotCreateCustomerGivenPaymentTypeAsNull() throws Exception {
+        givenRequestWithPaymentTypeAsNull();
         whenCreateCustomersAPICalled();
         thenExpectNoCallToCustomerServiceCreateCustomer();
         thenExpectResponseHasBadRequestStatus();
     }
 
+    @Test
+    public void shouldNotCreateCustomerGivenInvalidPaymentType() throws Exception {
+        givenRequestWithInvalidPaymentType();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    // birth Date
+    @Test
+    public void shouldNotCreateCustomerGivenBirthDateAsNull() throws Exception {
+        givenRequestWithBirthDateAsNull();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenBirthDateLessThenRequired() throws Exception {
+        givenRequestWithBirthDateLessThenRequired();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenBirthDateMoreThenRequired() throws Exception {
+        givenRequestWithBirthDateMoreThenRequired();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    // address validation
     @Test
     public void shouldNotCreateCustomerGivenAddressAsNull() throws Exception {
         givenRequestWithAddressAsNull();
@@ -135,6 +173,127 @@ class CustomerControllerTest {
         thenExpectResponseHasBadRequestStatus();
     }
 
+    @Test
+    public void shouldNotCreateCustomerGivenAddressSizeLessThenRequired() throws Exception {
+        givenRequestWithAddressWithSizeLessThanRequired();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenAddressSizeMoreThenRequired() throws Exception {
+        givenRequestWithAddressWithSizeMoreThanRequired();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    // phone numbers validation
+    @Test
+    public void shouldNotCreateCustomerGivenPhoneNumbersAsNull() throws Exception {
+        givenRequestWithPhoneNumbersAsNull();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPhoneNumbersAsEmptySet() throws Exception {
+        givenRequestWithPhoneNumbersAsEmptyList();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    // password validation
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAndPasswordConfirmationAsNull() throws Exception {
+        givenRequestWithPasswordAndPasswordConfirmationAsNull();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAsNull() throws Exception {
+        givenRequestWithPasswordAsNull();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordConfirmationAsNull() throws Exception {
+        givenRequestWithPasswordConfirmationAsNull();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordDifferentThanPasswordConfirmation() throws Exception {
+        givenRequestWithPasswordDifferentThanPasswordConfirmation();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAndPasswordConfirmationAsEmptyString() throws Exception {
+        givenRequestWithPasswordAndPasswordConfirmationAsEmptyString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAsEmptyString() throws Exception {
+        givenRequestWithPasswordAndPasswordAsEmptyString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordConfirmationAsEmptyString() throws Exception {
+        givenRequestWithPasswordConfirmationAsEmptyString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAndPasswordConfirmationAsBlankString() throws Exception {
+        givenRequestWithPasswordAndPasswordConfirmationAsBlankString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAsBlankString() throws Exception {
+        givenRequestWithPasswordAsBlankString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordConfirmationAsBlankString() throws Exception {
+        givenRequestWithPasswordConfirmationAsBlankString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
+
+    @Test
+    public void shouldNotCreateCustomerGivenPasswordAsEmptyStringAndPasswordConfirmationAsBlankString() throws Exception {
+        givenRequestWithPasswordAsEmptyStringAndPasswordConfirmationAsBlankString();
+        whenCreateCustomersAPICalled();
+        thenExpectNoCallToCustomerServiceCreateCustomer();
+        thenExpectResponseHasBadRequestStatus();
+    }
 
     /*
      * GIVEN Methods
@@ -185,9 +344,25 @@ class CustomerControllerTest {
         createCustomerRequest.setFullName(" ");
     }
 
-    private void givenRequestWithPhoneNumberAsNull() {
+    private void givenRequestWithPaymentTypeAsNull() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPaymentType(null);
+    }
+
+    private void givenRequestWithInvalidPaymentType() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPaymentType(PaymentType.CASH);
+    }
+
+    private void givenRequestWithPhoneNumbersAsNull() {
         givenValidCreateCustomerRequest();
         createCustomerRequest.setPhoneNumbers(null);
+
+    }
+
+    private void givenRequestWithPhoneNumbersAsEmptyList() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPhoneNumbers(Set.of());
 
     }
 
@@ -195,6 +370,98 @@ class CustomerControllerTest {
         givenValidCreateCustomerRequest();
         createCustomerRequest.setAddress(null);
     }
+
+    private void givenRequestWithAddressWithSizeLessThanRequired() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setAddress(RandomStringUtils.randomAlphabetic(9));
+    }
+
+    private void givenRequestWithAddressWithSizeMoreThanRequired() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setAddress(RandomStringUtils.randomAlphabetic(101));
+    }
+
+    private void givenRequestWithBirthDateAsNull() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setBirthDate(null);
+    }
+
+    private void givenRequestWithBirthDateLessThenRequired() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setBirthDate(LocalDate.of(1899, 12, 31));
+    }
+
+    private void givenRequestWithBirthDateMoreThenRequired() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setBirthDate(LocalDate.of(2030, 06, 01));
+    }
+
+    private void givenRequestWithPasswordAndPasswordConfirmationAsNull() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(null);
+        createCustomerRequest.setPasswordConfirmation(null);
+    }
+
+    private void givenRequestWithPasswordAsNull() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(null);
+        createCustomerRequest.setPasswordConfirmation("password");
+    }
+
+    private void givenRequestWithPasswordConfirmationAsNull() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword("password");
+        createCustomerRequest.setPasswordConfirmation(null);
+    }
+
+    private void givenRequestWithPasswordDifferentThanPasswordConfirmation() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword("password");
+        createCustomerRequest.setPasswordConfirmation("_password");
+    }
+
+    private void givenRequestWithPasswordAndPasswordConfirmationAsEmptyString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(StringUtils.EMPTY);
+        createCustomerRequest.setPasswordConfirmation(StringUtils.EMPTY);
+    }
+
+    private void givenRequestWithPasswordAndPasswordAsEmptyString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(StringUtils.EMPTY);
+        createCustomerRequest.setPasswordConfirmation("password");
+    }
+
+    private void givenRequestWithPasswordConfirmationAsEmptyString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword("password");
+        createCustomerRequest.setPasswordConfirmation(StringUtils.EMPTY);
+    }
+
+    private void givenRequestWithPasswordAndPasswordConfirmationAsBlankString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(StringUtils.SPACE);
+        createCustomerRequest.setPasswordConfirmation(StringUtils.SPACE);
+    }
+
+    private void givenRequestWithPasswordAsBlankString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(StringUtils.SPACE);
+        createCustomerRequest.setPasswordConfirmation("password");
+    }
+
+    private void givenRequestWithPasswordConfirmationAsBlankString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword("password");
+        createCustomerRequest.setPasswordConfirmation(StringUtils.SPACE);
+    }
+
+    private void givenRequestWithPasswordAsEmptyStringAndPasswordConfirmationAsBlankString() {
+        givenValidCreateCustomerRequest();
+        createCustomerRequest.setPassword(StringUtils.EMPTY);
+        createCustomerRequest.setPasswordConfirmation(StringUtils.SPACE);
+    }
+
 
     /*
      * WHEN Methods

@@ -1,10 +1,8 @@
 package com.polovyi.ivan.tutorials.testv2;
 
-import com.polovyi.ivan.tutorials.enm.PaymentType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,9 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
-import static org.junit.jupiter.params.provider.EnumSource.Mode.INCLUDE;
 
 @Slf4j
 public class BirthDateValidationTest extends ControllerTest {
@@ -60,6 +55,6 @@ public class BirthDateValidationTest extends ControllerTest {
     }
 
     private static List<LocalDate> invalidDatesVariation() {
-        return Arrays.asList(null, LocalDate.of(1899,12,31), LocalDate.of(2030, 06, 01));
+        return Arrays.asList(null, LocalDate.of(1899, 12, 31), LocalDate.of(2030, 06, 01));
     }
 }
