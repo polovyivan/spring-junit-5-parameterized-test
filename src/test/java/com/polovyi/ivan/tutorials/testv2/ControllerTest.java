@@ -8,11 +8,8 @@ import com.polovyi.ivan.tutorials.dto.response.CustomerResponse;
 import com.polovyi.ivan.tutorials.enm.PaymentType;
 import com.polovyi.ivan.tutorials.service.CustomerService;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -71,6 +67,17 @@ public abstract class ControllerTest {
     /*
      * GIVEN Methods
      */
+
+    protected void givenCustomerServiceGetAllCustomersReturnsListOfCustomers() {
+        customerResponse = CustomerResponse.builder()
+                .id("1")
+                .fullName("Ivan Polovyi")
+                .address("Address")
+                .phoneNumbers(Set.of("1-669-210-0504"))
+                .createdAt(LocalDate.now())
+                .build();
+        doReturn(List.of(customerResponse)).when(customerService).getAllCustomers();
+    }
 
     protected void givenValidCreateCustomerRequest() {
         createCustomerRequest = CreateCustomerRequest.builder()
