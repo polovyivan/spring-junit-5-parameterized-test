@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "3b46c702-f059-4c4c-b80d-7333d9716781",
+		"name": "spring-junit-5-parameterized-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-junit-5-parameterized-test/v1/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-junit-5-parameterized-test",
+						"v1",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "fullName",
+							"value": "Rueben Purdy",
+							"disabled": true
+						},
+						{
+							"key": "phoneNumber",
+							"value": "893-087-1038",
+							"disabled": true
+						},
+						{
+							"key": "createdAt",
+							"value": "2016-01-30",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Ivan Polovyi\",\n    \"paymentType\": \"VISA\",\n    \"birthDate\": \"1900-12-06\",\n    \"address\": \"Apt. 843 399 Lachelle Crossing, New Eldenhaven, LA 63962-9260\",\n    \"phoneNumbers\": [\n        \"831.259.2365\"\n    ],\n    \"password\": \"password\",\n    \"passwordConfirmation\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/spring-junit-5-parameterized-test/v1/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-junit-5-parameterized-test",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
